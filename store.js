@@ -3,7 +3,16 @@ var store = {
 	state: {
 		todoLists: [],
 	},
-	createTodoList: function(){
+	createTodoList: function(data){
+		// ...
+		var baseTodoList = {
+			_id: +(new Date()), 
+			name: null, 
+			description: null, 
+			todos:[]
+		};
+
+		this.state.todoLists.push(Object.assign(baseTodoList, data));
 
 	},
 	editTodoList: function(todoListId, data){
