@@ -9,9 +9,23 @@
 
 <body>
 	<div id="app">
-		<todo-list-summary v-for="list in sharedState.todoLists" v-bind:todo-list="list"></todo-list-summary>
+		<ul>
+			<li v-for="list in sharedState.todoLists">
+				<!-- <transition name="component-fade" mode="out-in"> -->
+					<todo-list-summary v-bind:todo-list="list"></todo-list-summary>
+					<edit-todo-list v-bind:todo-list="list"></edit-todo-list>
+					<add-todo v-bind:todo-list="list"></add-todo>
+					<ul>
+						<li>
+							<todo-summary v-for="todo in list.todos" v-bind:todo="todo"></todo-summary>
+						</li>
+					</ul>
+		<!-- 			<component v-bind:is="view"></component>-->		
+				<!-- </transition> -->
+			</li>
+		</ul>
 		<create-todo-list></create-todo-list>
-		<edit-todo-list v-for="list in sharedState.todoLists" v-bind:todo-list="list"></edit-todo-list>
+		
 	</div>
 	
 
@@ -43,6 +57,23 @@
 				<button type="submit">Edit Todo List</button>
 				
 		</form>
+	</script>
+	<script type="text/x-template" id="todo-summary-template">
+		<div>
+			<p>Todo-Name: {{todo.name}}</p> <p>Todo-Description: {{todo.description}}</p>
+		</div>
+	</script>
+	<script type="text/x-template" id="add-todo-template">
+		<form v-on:submit.prevent="addTodo($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Add Todo</button>
+				
+		</form>		
 	</script>
 
 

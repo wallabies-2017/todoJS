@@ -19,10 +19,6 @@ Vue.component('create-todo-list', {
 	},
 	methods:{
 		createTodoList: function(event, name, description){
-			console.log(event);
-			console.log(this.$data);
-			console.log(name);
-			console.log(description);
 			store.createTodoList({
 				name: name,
 				description: description
@@ -51,7 +47,37 @@ Vue.component('edit-todo-list', {
 			});
 		}
 	}
-})
+});
+
+Vue.component('todo-summary', {
+	template: '#todo-summary-template',
+	props:{
+		todo: Object
+	}
+});
+
+Vue.component('add-todo', {
+	template: '#add-todo-template',
+	props:{
+		todoList: Object
+	},
+	data: function(){
+		return {
+			name:'',
+			description:''
+		};
+	},
+	methods:{
+		addTodo: function(event, name, description){
+			store.addTodo(this.todoList._id, {
+				name: name,
+				description: description
+			});
+			
+		}
+	}
+
+});
 
 
 
