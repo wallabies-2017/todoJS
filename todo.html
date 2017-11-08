@@ -10,20 +10,40 @@
 <body>
 	<div id="app">
 		<todo-list-summary v-for="list in sharedState.todoLists" v-bind:todo-list="list"></todo-list-summary>
+		<create-todo-list></create-todo-list>
+		<edit-todo-list v-for="list in sharedState.todoLists" v-bind:todo-list="list"></edit-todo-list>
 	</div>
 	
 
 	<script type="text/x-template" id="todo-list-summary-template">
 		<div>
-			<p>
-				{{todoList.name}} : {{todoList.description}}
-
-			</p>
+			<p>Name: {{todoList.name}}</p> <p>Description: {{todoList.description}}</p>
 		</div>
-
-
 	</script>
-	
+	<script type="text/x-template" id="create-todo-list-template">
+		<form v-on:submit.prevent="createTodoList($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Create Todo List</button>
+				
+		</form>
+	</script>
+	<script type="text/x-template" id="edit-todo-list-template">
+		<form v-on:submit.prevent="editTodoList($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Edit Todo List</button>
+				
+		</form>
+	</script>
 
 
 

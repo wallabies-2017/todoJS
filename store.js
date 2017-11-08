@@ -64,9 +64,3 @@ var store = {
 	},
 };
 
-
-
-
-store.createTodoList({name:'school', description:'homework'});
-var id = store.state.todoLists[0]._id;
-store.addTodo(id, {name:'period 1', description:'math homework'});
