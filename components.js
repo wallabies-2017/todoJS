@@ -79,6 +79,28 @@ Vue.component('add-todo', {
 
 });
 
+Vue.component('edit-todo', {
+	template: '#edit-todo-template',
+	props:{
+		todoList: Object,
+		todo: Object
+	},
+	data: function(){
+		return {
+			name: this.todo.name,
+			description: this.todo.description
+		};
+	},
+	methods:{
+		editTodo: function(event, name, description){
+			store.editTodo(this.todoList._id, this.todo._id, {
+				name: name,
+				description: description
+			});
+		}
+	}	
+});
+
 
 
 

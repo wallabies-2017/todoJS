@@ -15,9 +15,11 @@
 					<todo-list-summary v-bind:todo-list="list"></todo-list-summary>
 					<edit-todo-list v-bind:todo-list="list"></edit-todo-list>
 					<add-todo v-bind:todo-list="list"></add-todo>
+
 					<ul>
-						<li>
-							<todo-summary v-for="todo in list.todos" v-bind:todo="todo"></todo-summary>
+						<li v-for="todo in list.todos">
+							<todo-summary v-bind:todo="todo"></todo-summary>
+							<edit-todo v-bind:todo-list="list" v-bind:todo="todo"></edit-todo>
 						</li>
 					</ul>
 		<!-- 			<component v-bind:is="view"></component>-->		
@@ -73,6 +75,17 @@
 			</label>	
 				<button type="submit">Add Todo</button>
 				
+		</form>		
+	</script>
+	<script type="text/x-template" id="edit-todo-template">
+		<form v-on:submit.prevent="editTodo($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Edit Todo </button>
 		</form>		
 	</script>
 

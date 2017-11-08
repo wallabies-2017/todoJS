@@ -40,6 +40,17 @@ var store = {
 		return true;
 
 	},
+	getTodo: function(todoListId, todoId){
+		var todoList = this.getTodoList(todoListId);
+		if (todoList){
+			return todoList.todos.find(function(element){
+				if (element._id === todoId){
+					return element;
+				}
+			});
+		}
+		
+	},	
 	addTodo: function(todoListId, data){
 		var todoList = this.getTodoList(todoListId);
 		if (!todoList){
@@ -57,8 +68,23 @@ var store = {
 
 	},
 	editTodo:function(todoListId, todoId, data){
+		var todo = this.getTodo(todoListId, todoId);
+		if (!todo){
+			return false;
+		}
+
+
+		if (data.hasOwnProperty('name')){
+			Vue.set(todo, 'name', data.name);
+		}
+
+		if (data.hasOwnProperty('description')){
+			Vue.set(todo, 'description', data.description);
+		}
+		return true;
 
 	},
+	
 	deleteTodo: function(todoListId, todoId){
 
 	},
