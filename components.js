@@ -2,12 +2,12 @@
 
 Vue.config.devtools = true;
 
-Vue.component({
+Vue.component('', {
 	template:'',
 	props:{
 
 	},
 	methods: {
-		
+
 	}
 });
