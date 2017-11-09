@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<ul>
+				<li 
+					is="todo-list-item"
+					v-for="list in sharedState.todoLists"
+					v-bind:todo-list="list"
+					v-on:edit:todolist="editTodoList"
+					v-on:add:todo="addTodo"
+					v-on:edit:todo="editTodo"
+				>
+				</li>
+			</ul>
+			
+
+			<create-todo-list 
+				v-on:create:todolist="createTodoList"
+			>
+			</create-todo-list>
+			
+		</div>
+		<script src="/dist/build.js"></script>
+	</body>
+</html>
