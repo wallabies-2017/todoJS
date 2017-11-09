@@ -29,9 +29,12 @@ var app = new Vue({
 		}
 	},
 	computed: {
-		actionText: function(){
+		editMode: function(){
 			return this.privateState.mode.edit ? "Summary":"Edit";
-		}
+		},
+		detailMode: function(){
+			return this.privateState.mode.detail ? "Hide":"Detail";
+		},
 	}
 });
 
