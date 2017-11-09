@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="./style.css">
+	
+	<title></title>
+</head>
+
+<body>
+	<div id="app">
+		<todo-list-summary v-for="list in sharedState.todoLists" v-bind:todo-list="list"></todo-list-summary>
+	</div>
+	
+
+	<script type="text/x-template" id="todo-list-summary-template">
+		<div>
+			<p>
+				{{todoList.name}} : {{todoList.description}}
+
+			</p>
+		</div>
+
+
+	</script>
+	
+
+
+
+	<script type="text/javascript" src="./components.js"></script>
+	<script type="text/javascript" src="./store.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
