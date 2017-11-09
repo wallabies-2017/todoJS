@@ -12,73 +12,14 @@
 	<body>
 		<div id="app">
 			<ul>
-				<li v-for="list in sharedState.todoLists">
-						
-					<transition-group name="component-fade" mode="in-out">
-						<todo-list-summary 
-							v-if="!privateState.mode.edit" 
-							v-bind:todo-list="list" 
-							v-bind:key="list._id"
-						>
-						</todo-list-summary>
-						
-						
-
-						<edit-todo-list 
-							v-if="privateState.mode.edit" 
-							v-bind:todo-list="list" 
-							v-bind:key="list._id"
-							v-on:edit:todolist="editTodoList"
-						>
-						</edit-todo-list>
-					</transition-group>
-
-					<button 
-						v-bind:key="list._id"
-						v-on:click="privateState.mode.edit = !privateState.mode.edit" 
-					>
-						{{ editMode }}
-					</button>
-					<button 
-						v-bind:key="list._id"
-						v-on:click="privateState.mode.detail = !privateState.mode.detail" 
-					>
-						{{ detailMode }}
-					</button>
-					<transition-group name="component-fade" mode="in-out">
-						<add-todo 
-							v-if="privateState.mode.detail"
-							v-bind:todo-list="list"
-							v-bind:key="list._id"
-							v-on:add:todo="addTodo"
-						>
-						</add-todo>
-
-						<ul 
-							v-if="privateState.mode.detail"
-							v-bind:key="list._id"
-						>
-							<li 
-								v-for="todo in list.todos"
-							>
-								<todo-summary 
-									v-bind:todo="todo"
-								>
-								</todo-summary>
-
-								<edit-todo 
-									v-bind:todo-list="list" 
-									v-bind:todo="todo"
-									v-on:edit:todo="editTodo"
-								>
-									
-								</edit-todo>
-							
-							</li>
-						
-						</ul>
-					
-					</transition-group>	
+				<li 
+					is="todo-list-item" 
+					v-for="list in sharedState.todoLists" 
+					v-bind:todo-list="list"
+					v-on:edit:todolist="editTodoList"
+					v-on:add:todo="addTodo"
+					v-on:edit:todo="editTodo"
+				>
 				</li>
 			</ul>
 			
@@ -90,6 +31,73 @@
 			
 		</div>
 		
+		<script type="text/x-template" id="todo-list-item-template">
+			<div>
+				<transition-group name="component-fade" mode="in-out">
+					<todo-list-summary 
+						v-if="!mode.edit" 
+						v-bind:todo-list="todoList" 
+						v-bind:key="todoList._id"
+					>
+					</todo-list-summary>
+					
+					
+	
+					<edit-todo-list 
+						v-if="mode.edit" 
+						v-bind:todo-list="todoList" 
+						v-bind:key="todoList._id"
+					>
+					</edit-todo-list>
+				</transition-group>
+	
+				<button 
+					v-bind:key="todoList._id"
+					v-on:click="mode.edit = !mode.edit" 
+				>
+					{{ editMode }}
+				</button>
+				<button 
+					v-bind:key="todoList._id"
+					v-on:click="mode.detail = !mode.detail" 
+				>
+					{{ detailMode }}
+				</button>
+	
+				<transition-group name="component-fade" mode="in-out">
+					<add-todo 
+						v-if="mode.detail"
+						v-bind:todo-list="todoList"
+						v-bind:key="todoList._id"
+					>
+					</add-todo>
+	
+					<ul 
+						v-if="mode.detail"
+						v-bind:key="todoList._id"
+					>
+						<li 
+							v-for="todo in todoList.todos"
+						>
+							<todo-summary 
+								v-bind:todo="todo"
+							>
+							</todo-summary>
+	
+							<edit-todo 
+								v-bind:todo-list="todoList" 
+								v-bind:todo="todo"
+							>
+								
+							</edit-todo>
+						
+						</li>
+					
+					</ul>
+				
+				</transition-group>	
+			</div>
+		</script>
 
 		<script type="text/x-template" id="todo-list-summary-template">
 			<div>

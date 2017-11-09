@@ -2,6 +2,31 @@
 
 Vue.config.devtools = true;
 
+
+Vue.component('todo-list-item', {
+	template:'#todo-list-item-template',
+	props:{
+		todoList: Object
+	},
+	data: function(){
+		return {
+			mode: {
+				edit: false,
+				detail: false
+			}
+		};
+	},
+	computed: {
+		editMode: function(){
+			return this.mode.edit ? "Summary":"Edit";
+		},
+		detailMode: function(){
+			return this.mode.detail ? "Hide":"Detail";
+		},
+	}
+});
+
+
 Vue.component('todo-list-summary', {
 	template:'#todo-list-summary-template',
 	props:{
