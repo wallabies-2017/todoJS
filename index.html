@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="./style.css">
+	
+	<title></title>
+</head>
+
+<body>
+	<div id="app">
+		<create-todo-list></create-todo-list>
+
+		<ul>
+			<li v-for="list in sharedState.todoLists">
+
+			
+
+
+
+
+					<todo-list-summary v-bind:todo-list="list"></todo-list-summary>
+
+
+					<edit-todo-list v-bind:todo-list="list"></edit-todo-list>
+					<add-todo v-bind:todo-list="list"></add-todo>
+
+
+
+
+					<ul>
+						<li v-for="todo in list.todos">
+							<todo-summary v-bind:todo="todo"></todo-summary>
+							<edit-todo v-bind:todo-list="list" v-bind:todo="todo"></edit-todo>
+						</li>
+					</ul>
+
+			</li>
+		</ul>
+		
+	</div>
+	
+
+	<script type="text/x-template" id="todo-list-summary-template">
+		<div>
+			<p>Name: {{todoList.name}}</p> <p>Description: {{todoList.description}}</p>
+		</div>
+	</script>
+	<script type="text/x-template" id="create-todo-list-template">
+		<form v-on:submit.prevent="createTodoList($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Create Todo List</button>
+				
+		</form>
+	</script>
+	<script type="text/x-template" id="edit-todo-list-template">
+		<form v-on:submit.prevent="editTodoList($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Edit Todo List</button>
+				
+		</form>
+	</script>
+	<script type="text/x-template" id="todo-summary-template">
+		<div>
+			<p>Todo-Name: {{todo.name}}</p> <p>Todo-Description: {{todo.description}}</p>
+		</div>
+	</script>
+	<script type="text/x-template" id="add-todo-template">
+		<form v-on:submit.prevent="addTodo($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Add Todo</button>
+				
+		</form>		
+	</script>
+	<script type="text/x-template" id="edit-todo-template">
+		<form v-on:submit.prevent="editTodo($event, name, description)">
+			<label> Name:
+				<input type="text" name="name" v-model="name">
+			</label>
+			<label>	Description:
+				<input type="text" name="description" v-model="description">
+			</label>	
+				<button type="submit">Edit Todo </button>
+		</form>		
+	</script>
+
+
+
+	<script type="text/javascript" src="./components.js"></script>
+	<script type="text/javascript" src="./store.js"></script>
+	<script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
