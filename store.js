@@ -24,13 +24,6 @@ var store = {
 	editTodoList: function(todoListId, data){
 
 	},
-	addTodo: function(todoListId, data){
-		// .....
-
-
-		this.state.todoLists.push(todo);
-
-	},
 	getTodoList: function(todoListId){
 		var viewTodoList = this.state.todoLists;
 		return viewTodoList.find(function(element){

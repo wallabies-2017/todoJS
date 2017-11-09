@@ -2,6 +2,43 @@
 
 Vue.config.devtools = true;
 
+
+Vue.component('todo-list-item', {
+	template:'#todo-list-item-template',
+	props:{
+		todoList: Object
+	},
+	data: function(){
+		return {
+			mode: {
+				detail: false,
+				edit: false
+			}
+		}
+	},	
+	computed: {
+		editMode: function(){
+			return this.mode.edit ? "Summary":"Edit";
+		},
+		detailMode: function(){
+			return this.mode.detail ? "Hide":"Detail";
+		},
+	},
+	methods: {
+		editTodoList: function(todoList, args){
+			this.$emit("edit:todolist", todoList, args);
+			this.$set(this.mode, "edit", !this.mode.edit);
+		},
+		editTodo: function(todoList, todo, args){
+			this.$emit("edit:todo", todoList, todo, args);
+		},
+		addTodo: function(todoList, args){
+			this.$emit("add:todo", todoList, todo, args);
+		}
+	}
+});
+
+
 Vue.component('todo-list-summary', {
 	template:'#todo-list-summary-template',
 	props:{
@@ -41,10 +78,43 @@ Vue.component('edit-todo-list', {
 	},
 	methods: {
 		editTodoList: function(event, name, description){
+			console.log(arguments);
 			this.$emit("edit:todolist", this.todoList, {
 				name: name,
 				description: description
 			});
+		}
+	}
+});
+
+
+Vue.component('todo-item', {
+	template:'#todo-item-template',
+	props:{
+		todoList: Object,
+		todo: Object
+	},
+	data: function(){
+		return {
+			mode: {
+				detail: false,
+				edit: false
+			}
+		}
+	},	
+	computed: {
+		editMode: function(){
+			return this.mode.edit ? "Summary":"Edit";
+		}
+	},
+	methods: {
+		editTodo: function(todoList, todo, args){
+			this.$emit("edit:todo", todoList, todo, args);
+			this.$set(this.mode, "edit", !this.mode.edit);
+
+		},
+		addTodo: function(todoList, args){
+			this.$emit("add:todo", todoList, todo, args);
 		}
 	}
 });

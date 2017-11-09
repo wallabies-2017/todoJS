@@ -27,14 +27,6 @@ var app = new Vue({
 		addTodo: function(todoList, args){
 			store.addTodo(todoList, todo, args);
 		}
-	},
-	computed: {
-		editMode: function(){
-			return this.privateState.mode.edit ? "Summary":"Edit";
-		},
-		detailMode: function(){
-			return this.privateState.mode.detail ? "Hide":"Detail";
-		},
 	}
 });
 
