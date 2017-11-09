@@ -102,14 +102,16 @@ var store = {
 	},
 	
 	deleteTodo: function(todoListId, todoId){
-		var todo = this.getTodo(todoListId, todoId)
+		var todoList = this.getTodoList(todoListId)
 
-		if (!todo){
+		if (!todoList){
 			return false;
 		}
+		var removed = _.remove(todoList.todos, function(value){
+			return value._id === todoId;
+		});
 
-		this.state.todoLists.push()
-
+		return removed ? true:false;
 	}
 };
 

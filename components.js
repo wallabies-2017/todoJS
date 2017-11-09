@@ -19,7 +19,7 @@ Vue.component('create-todo-list', {
 	},
 	methods:{
 		createTodoList: function(event, name, description){
-			store.createTodoList({
+			this.$emit("create:todolist", {
 				name: name,
 				description: description
 			});
@@ -39,9 +39,9 @@ Vue.component('edit-todo-list', {
 			description: this.todoList.description
 		};
 	},
-	methods:{
+	methods: {
 		editTodoList: function(event, name, description){
-			store.editTodoList(this.todoList._id, {
+			this.$emit("edit:todolist", this.todoList, {
 				name: name,
 				description: description
 			});
@@ -69,11 +69,10 @@ Vue.component('add-todo', {
 	},
 	methods:{
 		addTodo: function(event, name, description){
-			store.addTodo(this.todoList._id, {
+			this.$emit("add:todo", this.todoList, {
 				name: name,
 				description: description
 			});
-			
 		}
 	}
 
@@ -93,7 +92,7 @@ Vue.component('edit-todo', {
 	},
 	methods:{
 		editTodo: function(event, name, description){
-			store.editTodo(this.todoList._id, this.todo._id, {
+			this.$emit("edit:todo", this.todoList, this.todo, {
 				name: name,
 				description: description
 			});
