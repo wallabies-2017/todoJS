@@ -102,7 +102,13 @@ var store = {
 	},
 	
 	deleteTodo: function(todoListId, todoId){
+		var todo = this.getTodo(todoListId, todoId)
 
+		if (!todo){
+			return false;
+		}
+
+		this.state.todoLists.push()
 
 	}
 };
