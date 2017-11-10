@@ -13,6 +13,9 @@
 
 
 <script>
+import EventBus from '../EventBus.js';
+
+
 export default {
 	name: 'create-todo-list',
 	data: function(){
@@ -23,7 +26,7 @@ export default {
 	},
 	methods:{
 		createTodoList: function(event, name, description){
-			this.$emit("create:todolist", {
+			EventBus.$emit("create:todolist", {
 				name: name,
 				description: description
 			});

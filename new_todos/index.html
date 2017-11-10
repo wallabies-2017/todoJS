@@ -13,18 +13,12 @@
 					is="todo-list-item"
 					v-for="list in sharedState.todoLists"
 					v-bind:todo-list="list"
-					v-on:edit:todolist="editTodoList"
-					v-on:add:todo="addTodo"
-					v-on:edit:todo="editTodo"
 				>
 				</li>
 			</ul>
 			
 
-			<create-todo-list 
-				v-on:create:todolist="createTodoList"
-			>
-			</create-todo-list>
+			<create-todo-list></create-todo-list>
 			
 		</div>
 		<script src="/dist/build.js"></script>

@@ -10,7 +10,6 @@
 			v-if="mode.edit"
 			v-bind:todo-list="todoList" 
 			v-bind:todo="todo"
-			v-on:edit:todo="editTodo"
 		>
 		</edit-todo>
 		<button 
@@ -42,13 +41,6 @@ export default {
 	computed: {
 		editMode: function(){
 			return this.mode.edit ? "Summary":"Edit";
-		}
-	},
-	methods: {
-		editTodo: function(todoList, todo, args){
-			this.$emit("edit:todo", todoList, todo, args);
-			this.$set(this.mode, "edit", !this.mode.edit);
-
 		}
 	}
 };

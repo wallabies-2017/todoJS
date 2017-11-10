@@ -13,6 +13,8 @@
 
 
 <script>
+import EventBus from '../EventBus.js';
+
 export default {
 	name: 'add-todo',
 	props:{
@@ -26,7 +28,7 @@ export default {
 	},
 	methods:{
 		addTodo: function(event, name, description){
-			this.$emit("add:todo", this.todoList, {
+			EventBus.$emit("add:todo", this.todoList, {
 				name: name,
 				description: description
 			});

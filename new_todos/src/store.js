@@ -21,9 +21,6 @@ module.exports = {
 
 
 	},
-	editTodoList: function(todoListId, data){
-
-	},
 	getTodoList: function(todoListId){
 		var viewTodoList = this.state.todoLists;
 		return viewTodoList.find(function(element){

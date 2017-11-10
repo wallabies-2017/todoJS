@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import EventBus from '../EventBus.js';
+
 export default {
 	name: 'edit-todo',
 	props:{
@@ -25,7 +27,7 @@ export default {
 	},
 	methods:{
 		editTodo: function(event, name, description){
-			this.$emit("edit:todo", this.todoList, this.todo, {
+			EventBus.$emit("edit:todo", this.todoList, this.todo, {
 				name: name,
 				description: description
 			});
