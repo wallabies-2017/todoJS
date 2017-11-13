@@ -8,8 +8,6 @@ import TodoSummary from './components/TodoSummary.vue';
 import AddTodo from './components/AddTodo.vue';
 import EditTodo from './components/EditTodo.vue';
 
-import EventBus from './EventBus.js';
-
 import DataStore from './store.js';
 
 
@@ -23,7 +21,7 @@ Vue.component("todo-summary", TodoSummary);
 Vue.component("add-todo", AddTodo);
 Vue.component("edit-todo", EditTodo);
 
-new Vue({
+var app = new Vue({
 	el: '#app',
 	data: {
 		privateState: {
@@ -34,24 +32,5 @@ new Vue({
 		},
 		sharedState: DataStore.state
 	},
-	methods: {
-		createTodoList: function(args){
-			DataStore.createTodoList(args);
-		}, 
-		editTodoList: function(todoList, args){
-			DataStore.editTodoList(todoList._id, args);
-		},
-		editTodo: function(todoList, todo, args){
-			DataStore.editTodo(todoList._id, todo._id, args);
-		},
-		addTodo: function(todoList, args){
-			DataStore.addTodo(todoList._id, args);
-		}
-	},
-	mount: function(){
-		EventBus.$on("add:todo", this.addTodo);
-		EventBus.$on("create:todolist", this.createTodoList);
-		EventBus.$on("edit:todo", this.editTodo);
-		EventBus.$on("edit:todolist", this.editTodoList);
-	}
+	store: DataStore
 });

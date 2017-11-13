@@ -29,9 +29,12 @@ export default {
 	methods: {
 		editTodoList: function(event, name, description){
 			console.log(arguments);
-			EventBus.$emit("edit:todolist", this.todoList, {
-				name: name,
-				description: description
+			this.$store.dispatch("editTodoList", {
+				todoList: this.todoList,
+				data: {
+					name: name,
+					description: description
+				}
 			});
 		}
 	}

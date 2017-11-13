@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import EventBus from '../EventBus.js';
 
 export default {
 	name: 'edit-todo',
@@ -27,9 +26,13 @@ export default {
 	},
 	methods:{
 		editTodo: function(event, name, description){
-			EventBus.$emit("edit:todo", this.todoList, this.todo, {
-				name: name,
-				description: description
+			this.$store.dispatch("editTodo", {
+				todoList: this.todoList, 
+				todo: this.todo,
+				data: {
+					name: name,
+					description: description
+				}
 			});
 		}
 	}

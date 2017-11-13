@@ -13,7 +13,6 @@
 
 
 <script>
-import EventBus from '../EventBus.js';
 
 
 export default {
@@ -26,7 +25,7 @@ export default {
 	},
 	methods:{
 		createTodoList: function(event, name, description){
-			EventBus.$emit("create:todolist", {
+			this.$store.dispatch("createTodoList", {
 				name: name,
 				description: description
 			});
