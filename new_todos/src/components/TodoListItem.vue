@@ -44,7 +44,7 @@
 			>
 				<li 
 					is="todo-item"
-					v-for="todo in todoList.todos"
+					v-for="todo in $store.getters.getTodos(todoList._id)"
 					v-bind:todo-list="todoList"
 					v-bind:todo="todo"
 					v-bind:key="todo._id"

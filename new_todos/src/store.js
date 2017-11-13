@@ -5,13 +5,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-	debug: true,
+	strict: true,
 	state: {
 		todoLists: [],
 	},
 	mutations: {
 		createTodoList: function(state, payload){
-			this.state.todoLists.push(payload);
+			state.todoLists.push(payload);
 		},
 		editTodoList: function(state, payload){
 			if (payload.data.hasOwnProperty('name')){
@@ -156,6 +156,14 @@ const store = new Vuex.Store({
 				}
 			};
 		},
+		getTodos: function(state, getters){
+			return function(todoListId, todoId){
+				var todoList = getters.getTodoList(todoListId);
+				if (todoList){
+					return todoList.todos
+				}				
+			};
+		}
 	}
 });
 
